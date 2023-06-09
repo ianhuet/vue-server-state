@@ -20,20 +20,17 @@ interface Film {
   }
 }
 
-const props = defineProps({
-  films: Array as PropType<Film[]>,
-});
-
-console.log('Films ***', props.films)
+defineProps({ films: Array as PropType<Film[]> });
 </script>
 
 <template>
-  <table>
+  <table class="film-list">
     <thead>
       <tr>
         <td>Episode</td>
         <td>Title</td>
         <td>Release Date</td>
+        <td></td>
       </tr>
     </thead>
     <tbody>
@@ -46,3 +43,15 @@ console.log('Films ***', props.films)
     </tbody>
   </table>
 </template>
+
+<style scoped>
+.film-list {
+  width: 100%;
+}
+.film-list thead tr td {
+  border-bottom: 1px solid lightgrey;
+}
+.film-list tbody tr td {
+  padding: 0.4rem 0;
+}
+</style>

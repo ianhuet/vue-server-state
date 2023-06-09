@@ -13,7 +13,7 @@ const listFilms = gql`
 `;
 
 const filmDetail = gql`
-  query filmDetail($filmId: ID) {
+  query FilmDetail($filmId: ID) {
     film(filmID: $filmId) {
       title
       episodeID
