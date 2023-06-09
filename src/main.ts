@@ -1,7 +1,6 @@
 import { createApp, provide, h } from 'vue'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
-// import { ApolloClient } from '@apollo/client/core'
 
 import App from './App.vue'
 import router from './router'

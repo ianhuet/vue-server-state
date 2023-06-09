@@ -3,6 +3,7 @@ import type { PropType } from 'vue';
 import { RouterLink } from 'vue-router'
 
 interface Film {
+  id: string;
   title: string;
   episodeID: number;
   director: string;
@@ -38,7 +39,7 @@ defineProps({ films: Array as PropType<Film[]> });
         <td>{{ film.episodeID }}</td>
         <td>{{ film.title }}</td>
         <td>{{ film.releaseDate }}</td>
-        <td><RouterLink :to="{ name: 'detail', params: { id: film.episodeID }}">Detail</RouterLink></td>
+        <td><RouterLink :to="{ name: 'detail', params: { id: film.id }}">Detail</RouterLink></td>
       </tr>
     </tbody>
   </table>

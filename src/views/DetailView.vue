@@ -8,7 +8,7 @@ import Production from '../components/Production.vue';
 import { queries } from '../queries';
 
 const route = useRoute()
-const queryVars = ref({ filmId: route.params.id });
+const queryVars = ref({ id: route.params.id });
 const { result, loading, error } = useQuery(queries.filmDetail, queryVars);
 
 const film = computed(() => result.value?.film ?? {})
@@ -24,7 +24,7 @@ const film = computed(() => result.value?.film ?? {})
     <p v-if="loading">Loading...</p>
     <div v-else>
       <h1>{{ film?.title }}</h1>
-      <p>Episode #{{ $route.params.id }}</p>
+      <p>Episode #{{ film.episodeID }}</p>
 
       <div class="detail">
         <pre class="opening-crawl">{{ film?.openingCrawl }}</pre>

@@ -4,6 +4,7 @@ const listFilms = gql`
   query AllFilms {
     allFilms {
       films {
+        id
         title
         episodeID
         releaseDate
@@ -13,8 +14,8 @@ const listFilms = gql`
 `;
 
 const filmDetail = gql`
-  query FilmDetail($filmId: ID) {
-    film(filmID: $filmId) {
+  query FilmDetail($id: ID) {
+    film(id: $id) {
       title
       episodeID
       director
