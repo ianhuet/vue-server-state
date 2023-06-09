@@ -13,8 +13,8 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n": types.AllFilmsDocument,
     "\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      title\n      episodeID\n      director\n      producers\n      releaseDate\n      openingCrawl\n      characterConnection {\n        totalCount\n        characters {\n          name\n          species {\n            name\n          }\n        }\n      }\n    }\n  }\n": types.FilmDetailDocument,
+    "\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n": types.AllFilmsDocument,
 };
 
 /**
@@ -34,11 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n"): (typeof documents)["\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      title\n      episodeID\n      director\n      producers\n      releaseDate\n      openingCrawl\n      characterConnection {\n        totalCount\n        characters {\n          name\n          species {\n            name\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      title\n      episodeID\n      director\n      producers\n      releaseDate\n      openingCrawl\n      characterConnection {\n        totalCount\n        characters {\n          name\n          species {\n            name\n          }\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      title\n      episodeID\n      director\n      producers\n      releaseDate\n      openingCrawl\n      characterConnection {\n        totalCount\n        characters {\n          name\n          species {\n            name\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      title\n      episodeID\n      director\n      producers\n      releaseDate\n      openingCrawl\n      characterConnection {\n        totalCount\n        characters {\n          name\n          species {\n            name\n          }\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n"): (typeof documents)["\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

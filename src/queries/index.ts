@@ -1,18 +1,5 @@
 import gql from 'graphql-tag';
 
-const listFilms = gql`
-  query AllFilms {
-    allFilms {
-      films {
-        id
-        title
-        episodeID
-        releaseDate
-      }
-    }
-  }
-`;
-
 const filmDetail = gql`
   query FilmDetail($id: ID) {
     film(id: $id) {
@@ -30,6 +17,19 @@ const filmDetail = gql`
             name
           }
         }
+      }
+    }
+  }
+`;
+
+const listFilms = gql`
+  query AllFilms {
+    allFilms {
+      films {
+        id
+        title
+        episodeID
+        releaseDate
       }
     }
   }

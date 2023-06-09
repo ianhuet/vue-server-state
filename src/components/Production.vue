@@ -12,6 +12,7 @@ defineProps({ production: Object as PropType<Production> });
 
 <template>
   <div class="production">
+    <h3>Production</h3>
     <ul>
       <li>Release Date: {{ production?.releaseDate }}</li>
       <li>Director: {{ production?.director }}</li>
@@ -29,6 +30,13 @@ defineProps({ production: Object as PropType<Production> });
   background-color: lightgrey;
   color: black;
   padding: 1rem;
+}
+.production h3 {
+  border-bottom: 1px solid grey;
+  font-size: 11px;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.2rem;
+  text-transform: uppercase;  
 }
 .production ul {
   list-style-type: none;

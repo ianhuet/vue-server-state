@@ -27,7 +27,7 @@ const film = computed(() => result.value?.film ?? {})
       <p>Episode #{{ film.episodeID }}</p>
 
       <div class="detail">
-        <pre class="opening-crawl">{{ film?.openingCrawl }}</pre>
+        <pre>{{ film?.openingCrawl }}</pre>
         <aside>
           <Production :production="film" />
           <Characters :characters="film" />
@@ -42,8 +42,7 @@ const film = computed(() => result.value?.film ?? {})
 .detail {
   display: flex;
   flex-flow: row nowrap;
-}
-.opening-crawl {
-  padding: 1rem 2rem 0 0;
+  justify-content: space-between;
+  padding-top: 1rem;
 }
 </style>
