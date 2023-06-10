@@ -1,9 +1,23 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { PropType } from 'vue';
 import type { Person } from '../generated/graphql';
 // import type { Character } from '../queries/types';
 
-defineProps({ characters: Array as PropType<Person[]> });
+const props = defineProps({ characters: Array as PropType<Person[]> });
+
+const sortedCharacters = computed((): Person[] => {
+  if (!props.characters) {
+    return [];
+  }
+  
+  const characters = [...props.characters];
+  return characters.sort((a,b) => {
+    if (a?.name > b?.name) return 1;
+    if (b?.name > a?.name) return -1;
+    return 0;
+  });
+});
 
 function characterLabel(character: Person): string {
   const species = character?.species?.name ? ` (${character.species.name})` : '';
@@ -15,7 +29,7 @@ function characterLabel(character: Person): string {
   <div class="characters">
     <h3>Characters</h3>
     <ul>
-      <li v-for="(character, index) in characters" :key="index">{{ characterLabel(character) }}</li>
+      <li v-for="(character, index) in sortedCharacters" :key="index">{{ characterLabel(character) }}</li>
     </ul>
   </div>
 </template>
