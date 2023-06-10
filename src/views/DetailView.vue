@@ -3,15 +3,36 @@ import { useQuery } from '@vue/apollo-composable';
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import Characters from '../components/Characters.vue';
-import Production from '../components/Production.vue';
+import { default as CharactersPanel } from '../components/Characters.vue';
+import { default as ProductionPanel } from '../components/Production.vue';
+import type { Film, Person } from '../generated/graphql';
 import { queries } from '../queries';
+import type { Production } from '../queries/types';
 
 const route = useRoute()
 const queryVars = ref({ id: route.params.id });
 const { result, loading, error } = useQuery(queries.filmDetail, queryVars);
 
-const film = computed(() => result.value?.film ?? {})
+const film = computed((): Film => result.value?.film ?? {})
+const characters = computed((): Person[] => {
+  if (!result.value.film) {
+    return [];
+  }
+
+  return result.value.film?.characterConnection?.characters;
+});
+
+const production = computed((): Production => {
+  if (!result.value.film) {
+    return {};
+  }
+
+  return {
+    director: result.value.film.director,
+    producers: result.value.film.producers,
+    releaseDate: result.value.film.releaseDate,
+  };
+})
 </script>
 
 <template>
@@ -29,8 +50,8 @@ const film = computed(() => result.value?.film ?? {})
       <div class="detail">
         <pre>{{ film?.openingCrawl }}</pre>
         <aside>
-          <Production :production="film" />
-          <Characters :characters="film" />
+          <ProductionPanel :production="production" />
+          <CharactersPanel :characters="characters" />
         </aside>
       </div>
     </div>

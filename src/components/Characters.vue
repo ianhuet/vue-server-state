@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
+import type { Person } from '../generated/graphql';
+// import type { Character } from '../queries/types';
 
-interface Character {
-  name: string;
-  species: string;
+defineProps({ characters: Array as PropType<Person[]> });
+
+function characterLabel(character: Person): string {
+  const species = character?.species?.name ? ` (${character.species.name})` : '';
+  return `${character.name} ${species}`;
 }
-
-defineProps({ characters: Array as PropType<Character[]> });
 </script>
 
 <template>
   <div class="characters">
     <h3>Characters</h3>
     <ul>
-      <li v-for="character in characters" :key="character.name">{{ character.name }} ({{ character.species }})</li>
+      <li v-for="(character, index) in characters" :key="index">{{ characterLabel(character) }}</li>
     </ul>
   </div>
 </template>

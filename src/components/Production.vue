@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
-
-interface Production {
-  director: string;
-  producers: string[];
-  releaseDate: string;
-}
+import type { Production } from '../queries/types';
 
 defineProps({ production: Object as PropType<Production> });
 </script>

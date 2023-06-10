@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 const filmDetail = gql`
   query FilmDetail($id: ID) {
     film(id: $id) {
+      id
       title
       episodeID
       director
@@ -10,7 +11,6 @@ const filmDetail = gql`
       releaseDate
       openingCrawl
       characterConnection {
-        totalCount
         characters {
           name
           species {
