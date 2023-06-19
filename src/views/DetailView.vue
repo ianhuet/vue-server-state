@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { default as CharactersPanel } from '../components/Characters.vue';
@@ -10,20 +10,19 @@ import { queries } from '../queries';
 import type { Production } from '../queries/types';
 
 const route = useRoute()
-const queryVars = ref({ id: route.params.id });
-const { result, loading, error } = useQuery(queries.filmDetail, queryVars);
+const filmId = typeof route.params.id === 'string' ? route.params.id : route.params.id[0];
+const { result, loading, error } = useQuery(queries.filmDetail, { id: filmId });
 
-const film = computed((): Film => result.value?.film ?? {})
+const film = computed((): Film => result?.value?.film ?? {})
 const characters = computed((): Person[] => {
-  if (!result.value.film) {
+  if (!result?.value?.film) {
     return [];
   }
 
-  return result.value.film?.characterConnection?.characters;
+  return result?.value.film?.characterConnection?.characters;
 });
-
 const production = computed((): Production => {
-  if (!result.value.film) {
+  if (!result?.value.film) {
     return {};
   }
 
@@ -45,7 +44,7 @@ const production = computed((): Production => {
     <p v-if="loading">Loading...</p>
     <div v-else>
       <h1>{{ film?.title }}</h1>
-      <p>Episode #{{ film.episodeID }}</p>
+      <p>Episode #{{ film?.episodeID }}</p>
 
       <div class="detail">
         <pre>{{ film?.openingCrawl }}</pre>

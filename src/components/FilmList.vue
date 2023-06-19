@@ -2,30 +2,17 @@
 import type { PropType } from 'vue';
 import { RouterLink } from 'vue-router'
 
-interface Film {
-  id: string;
-  title: string;
-  episodeID: number;
-  director: string;
-  producers: string[];
-  releaseDate: string;
-  openingCrawl: string;
-  characterConnection: {
-    totalCount: number;
-    characters: {
-      name: string;
-      species: {
-        name: string;
-      }
-    }
-  }
-}
+import type { Film } from '../generated/graphql'
 
-defineProps({ films: Array as PropType<Film[]> });
+const props = defineProps({ films: Array as PropType<Film[]> });
+
+const hasNoFilms = () => !props.films || props.films?.length === 0;
 </script>
 
 <template>
-  <table class="film-list">
+  <p v-if="hasNoFilms()">No films found</p>
+
+  <table v-else class="film-list">
     <thead>
       <tr>
         <td>Episode</td>
@@ -35,11 +22,11 @@ defineProps({ films: Array as PropType<Film[]> });
       </tr>
     </thead>
     <tbody>
-      <tr v-for="film in films" :key="film.episodeID">
-        <td>{{ film.episodeID }}</td>
-        <td>{{ film.title }}</td>
-        <td>{{ film.releaseDate }}</td>
-        <td><RouterLink :to="{ name: 'detail', params: { id: film.id }}">Detail</RouterLink></td>
+      <tr v-for="film in films" :key="film?.episodeID">
+        <td>{{ film?.episodeID }}</td>
+        <td>{{ film?.title }}</td>
+        <td>{{ film?.releaseDate }}</td>
+        <td><RouterLink :to="{ name: 'detail', params: { id: film?.id }}">Detail</RouterLink></td>
       </tr>
     </tbody>
   </table>
