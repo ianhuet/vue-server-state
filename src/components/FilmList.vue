@@ -23,7 +23,7 @@ const hasNoFilms = () => !props.films || props.films?.length === 0;
     </thead>
     <tbody>
       <tr v-for="film in films" :key="film?.episodeID">
-        <td>{{ film?.episodeID }}</td>
+        <td>{{ film?.episodeIdNumeral }}</td>
         <td>{{ film?.title }}</td>
         <td>{{ film?.releaseDate }}</td>
         <td><RouterLink :to="{ name: 'detail', params: { id: film?.id }}">Detail</RouterLink></td>

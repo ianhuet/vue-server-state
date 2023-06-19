@@ -44,7 +44,7 @@ const production = computed((): Production => {
     <p v-if="loading">Loading...</p>
     <div v-else>
       <h1>{{ film?.title }}</h1>
-      <p>Episode #{{ film?.episodeID }}</p>
+      <p>Episode {{ film?.episodeIdNumeral }}</p>
 
       <div class="detail">
         <pre>{{ film?.openingCrawl }}</pre>

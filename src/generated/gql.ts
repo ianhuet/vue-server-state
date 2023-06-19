@@ -14,7 +14,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 const documents = {
     "\n  fragment FilmCharacters on Film {\n    characterConnection {\n      characters {\n        id\n        name\n        height\n        mass\n        species {\n          name\n        }\n        homeworld {\n          name\n        }\n      }\n      pageInfo {\n        endCursor\n        startCursor\n        hasPreviousPage\n        hasNextPage\n      }\n    }\n  }\n": types.FilmCharactersFragmentDoc,
-    "\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    releaseDate\n  }\n": types.FilmMetaFragmentDoc,
+    "\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    episodeIdNumeral @client\n    releaseDate\n  }\n": types.FilmMetaFragmentDoc,
     "\n  fragment FilmPlanets on Film {\n    planetConnection {\n      planets {\n        name\n        terrains\n        climates\n      }\n    }\n  }\n": types.FilmPlanetsFragmentDoc,
     "\n  fragment FilmProduction on Film {\n    director\n    producers\n    releaseDate\n  }\n": types.FilmProductionFragmentDoc,
     "\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      openingCrawl\n      ...FilmMeta\n      ...FilmPlanets\n      ...FilmProduction\n      ...FilmCharacters\n    }\n  }\n": types.FilmDetailDocument,
@@ -42,7 +42,7 @@ export function gql(source: "\n  fragment FilmCharacters on Film {\n    characte
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    releaseDate\n  }\n"): (typeof documents)["\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    releaseDate\n  }\n"];
+export function gql(source: "\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    episodeIdNumeral @client\n    releaseDate\n  }\n"): (typeof documents)["\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    episodeIdNumeral @client\n    releaseDate\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

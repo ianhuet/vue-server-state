@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import type { PropType } from 'vue';
 import type { Person } from '../generated/graphql';
-// import type { Character } from '../queries/types';
+import { utils } from '../utils';
 
 const props = defineProps({ characters: Array as PropType<Person[]> });
 
@@ -10,13 +10,8 @@ const sortedCharacters = computed((): Person[] => {
   if (!props.characters) {
     return [];
   }
-  
-  const characters = [...props.characters];
-  return characters.sort((a,b) => {
-    if (a?.name > b?.name) return 1;
-    if (b?.name > a?.name) return -1;
-    return 0;
-  });
+
+  return utils.sortObjArray<Person>(props.characters, 'name');
 });
 
 function characterLabel(character: Person): string {
